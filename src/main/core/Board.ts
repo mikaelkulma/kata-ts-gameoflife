@@ -13,7 +13,8 @@ interface ICountable {
 
 export interface IGameBoard extends ITicker, ICountable {
     addCell(x: number, y: number): IGameBoard
-    containsCellsAt(...points: IPoint[]) : boolean
+
+    containsCellsAt(...points: IPoint[]): boolean
 }
 
 export class Board implements IGameBoard {
@@ -33,6 +34,16 @@ export class Board implements IGameBoard {
         return this
     }
 
+    public addCells(...points: IPoint[]) {
+        points.forEach((point) => {
+            this.addCell(point.x, point.y);
+        })
+    }
+
+    public get cells(): IPoint[] {
+        return this.currentGeneration.keys();
+    }
+
     public containsCellsAt(...points: IPoint[]): boolean {
         return this.occupied(points).length === points.length;
     }
@@ -40,14 +51,14 @@ export class Board implements IGameBoard {
     public tick(): IGameBoard {
         const nextGeneration = new Board();
 
-        this.currentGeneration.forEach((point : IPoint, cell : ICell) => {
+        this.currentGeneration.forEach((point: IPoint, cell: ICell) => {
             const oldCell = cell.evolve(this.countNeighboursAt(point));
             if (oldCell.isAlive()) {
                 nextGeneration.addCell(point.x, point.y)
             }
 
             point.neighbours().forEach(neighbourPoint => {
-                const neighbourCell = this.currentGeneration.getValue(neighbourPoint) || new DeadCell() ;
+                const neighbourCell = this.currentGeneration.getValue(neighbourPoint) || new DeadCell();
 
                 if (!neighbourCell.isAlive() && !neighbourCell.isEvolved()) {
                     const newCell = neighbourCell.evolve(this.countNeighboursAt(neighbourPoint));
@@ -67,13 +78,13 @@ export class Board implements IGameBoard {
         return this.currentGeneration.containsKey(point);
     }
 
-    private occupied(points: IPoint[]) : IPoint[] {
+    private occupied(points: IPoint[]): IPoint[] {
         return points.filter((point) => {
             return this.containsCellAt(point)
         })
     }
 
-    private countNeighboursAt(point : IPoint) : number {
+    private countNeighboursAt(point: IPoint): number {
         const neighbours = point.neighbours();
         return this.occupied(neighbours).length
     }
