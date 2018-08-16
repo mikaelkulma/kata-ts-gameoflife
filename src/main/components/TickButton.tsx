@@ -1,13 +1,17 @@
 import * as React from 'react'
 
 interface IProps {
-    onClick?(event: React.MouseEvent<HTMLButtonElement>): void
+    running : boolean
+    onClick?(event: React.MouseEvent<HTMLButtonElement>): void,
 }
 
 const TickButton = (props: IProps) => {
+    const buttonText = props.running? "Stop" : "Start"
     return (
         <div>
-            <button onClick={props.onClick}>Tick!</button>
+            <button onClick={props.onClick}>
+                {buttonText}
+            </button>
         </div>
     )
 }
