@@ -59,7 +59,7 @@ it('should keep track of generation count', (done) => {
     setTimeout(()=> {
         expect(wrapped.state("generations")).toBe(1);
         done();
-    }, 1100)
+    }, 600)
 
 
 });

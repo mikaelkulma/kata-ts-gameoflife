@@ -11,13 +11,16 @@ export interface IProps {
 const Container = styled.div`
        position: relative;
        width: 500px;
-       margin: auto;
+       margin: 150px auto 0;
        > div {
            display: inline-block;
-           background: #eee;
-           margin: 5px;
-           padding: 8px;
+           background: black;
+           padding: 5px;
            position: absolute
+           width: 35px;
+           height: 20px;
+           color: #eee;
+           font-size: 0.8em;
        }
 `;
 
@@ -28,7 +31,7 @@ const VisualBoard = (props: IProps) => {
         {props.cells && props.cells.map(point =>
             (<div style={{
                 left : point.x * 50,
-                top: point.y * 50
+                top: point.y * 35
             }} key={point.toString()}>{point.toString()}</div>)
         )}
     </Container>
