@@ -1,6 +1,6 @@
 import * as React from 'react';
-import '../../assets/App.css';
 
+import styled from "styled-components";
 import {Board, IGameBoard} from "../core/Board";
 import {Point} from "../core/Point";
 import TickButton from "./TickButton";
@@ -23,6 +23,10 @@ initialBoard.addCells(
     Point.at(8, 3)
 );
 
+const Container = styled.div`
+    text-align: center;
+    font-family: sans-serif;
+`
 
 class App extends React.Component<{}, IState> {
 
@@ -36,11 +40,11 @@ class App extends React.Component<{}, IState> {
 
     public render() {
         return (
-            <div className="App">
+            <Container>
                 <TickButton running={this.state.running} onClick={this.onTickClickHandler}/>
                 <p>Generation: {this.state.generations}</p>
                 <VisualBoard cells={this.state.board.cells}/>
-            </div>
+            </Container>
         );
     }
 
