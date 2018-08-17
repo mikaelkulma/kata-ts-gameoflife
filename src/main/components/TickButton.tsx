@@ -10,6 +10,9 @@ const Container = styled.div`
     > button {
         padding: 10px 20px;
         border-radius: 10px;
+        &:focus, &:active {
+            outline: 0;
+        }
         &:hover {
             background: black;
             color: white;

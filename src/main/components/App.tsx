@@ -63,7 +63,7 @@ class App extends React.Component<{}, IState> {
                 running: true
             };
         });
-        this.timerId = window.setInterval(this.tick.bind(this), 500)
+        this.timerId = window.setInterval(this.tick.bind(this), 200)
     }
 
     private tick() {

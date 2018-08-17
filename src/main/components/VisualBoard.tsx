@@ -21,6 +21,7 @@ const Container = styled.div`
            height: 20px;
            color: #eee;
            font-size: 0.8em;
+           border-radius: 50%;
        }
 `;
 
@@ -30,6 +31,9 @@ const VisualBoard = (props: IProps) => {
     return <Container className="board">
         {props.cells && props.cells.map(point =>
             (<div style={{
+                backgroundColor: "rgb(200, " +
+                    (point.y * 40 < 255 ? point.y * 40: 255) + ", " +
+                    (point.x * 40 < 255 ? point.x * 40: 255) + ")",
                 left : point.x * 50,
                 top: point.y * 35
             }} key={point.toString()}>{point.toString()}</div>)
